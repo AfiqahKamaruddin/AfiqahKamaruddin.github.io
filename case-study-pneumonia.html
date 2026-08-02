@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Automating Pneumonia Detection via Deep Learning · Afiqah Kamaruddin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122A2E; --paper:#F4F1E9; --paper-raised:#FFFFFF;
+    --teal:#2C6E68; --teal-deep:#193F3C; --signal:#C98A2C;
+    --line:rgba(18,42,46,0.14); --muted:#5B6E6C;
+    --display: 'Fraunces', serif; --body: 'Inter', -apple-system, sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.65; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 28px;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(244,241,233,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{max-width:960px; display:flex; justify-content:space-between; align-items:center; height:64px;}
+  .nav-name{font-family:var(--mono); font-size:13px;}
+  .back-link{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); text-decoration:none;}
+  .back-link:hover{color:var(--teal-deep);}
+
+  header{padding:56px 0 32px;}
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1{font-family:var(--display); font-weight:600; font-size:clamp(28px,4.5vw,40px); color:var(--teal-deep); line-height:1.15;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:36px 0;}
+  @media(max-width:600px){.stat-row{grid-template-columns:1fr;}}
+  .stat-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:20px; text-align:center;}
+  .stat-card .num{font-family:var(--mono); font-size:26px; font-weight:600; color:var(--signal);}
+  .stat-card .lbl{font-size:12.5px; color:var(--muted); margin-top:6px;}
+
+  section{padding:36px 0; border-top:1px solid var(--line);}
+  h2{font-family:var(--display); font-size:21px; font-weight:600; color:var(--teal-deep); margin-bottom:14px;}
+  p{font-size:15.5px; color:var(--ink); text-align:justify; margin-bottom:14px;}
+  ul{margin:14px 0 14px 20px;}
+  li{font-size:15.5px; color:var(--ink); margin-bottom:8px; text-align:justify;}
+  li b{color:var(--teal-deep);}
+
+  figure{margin:28px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:8px; background:#fff;}
+  figcaption{font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:10px; text-align:left;}
+  .fig-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:600px){.fig-row{grid-template-columns:1fr;}}
+
+  footer{padding:48px 0 56px; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  footer a{color:var(--teal); text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">AFIQAH K.</div>
+    <a class="back-link" href="index.html">← Back to portfolio</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Case Study</div>
+    <h1>Automating Pneumonia Detection via Deep Learning</h1>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="num">96.28%</div><div class="lbl">Accuracy (ResNet50)</div></div>
+      <div class="stat-card"><div class="num">98.59%</div><div class="lbl">Recall (ResNet50)</div></div>
+      <div class="stat-card"><div class="num">0.99</div><div class="lbl">AUC (ResNet50)</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The Problem</h2>
+    <p>Pneumonia remains a leading cause of death for children worldwide, yet diagnosing it through X-ray interpretation is a difficult task prone to human error. I built this project to determine whether deep learning could provide a more reliable, automated screening tool to assist doctors in early detection.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>My Approach</h2>
+    <p>As part of a four-person university research project, I focused on building and evaluating two of the models we compared: a custom CNN and a pre-trained ResNet50. I used a public dataset of nearly 6,000 paediatric chest X-rays, applying image augmentation (rotation, reflection, scaling) to improve robustness, and a 5-fold cross-validation strategy to confirm the reliability of the results.</p>
+
+    <figure>
+      <img src="assets/pneumonia/fig5_xray_examples.png" alt="Normal vs pneumonia chest X-ray images, side by side, from the Kaggle paediatric chest X-ray dataset.">
+      <figcaption>Figure 5: Chest X-ray images for normal patients (left) and pneumonia patients (right); inflamed, denser lung tissue shows up lighter on the pneumonia scan</figcaption>
+    </figure>
+
+    <figure>
+      <img src="assets/pneumonia/fig6_class_distribution.png" alt="Bar charts showing the class distribution of normal vs pneumonia images across the training, testing, and validation splits.">
+      <figcaption>Figure 6: Distribution of normal and pneumonia classes across the training, testing, and validation splits</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Key Results</h2>
+    <ul>
+      <li><b>High accuracy:</b> the ResNet50 model emerged as the top performer, achieving an overall accuracy of 96.28%.</li>
+      <li><b>Near-perfect detection:</b> the model reached a 98.59% recall rate, meaning it almost never missed an actual positive case.</li>
+      <li><b>Clinical confidence:</b> by providing almost 99% certainty when ruling out the disease, this tool could meaningfully reduce the diagnostic workload for healthcare staff.</li>
+    </ul>
+
+    <figure>
+      <img src="assets/pneumonia/table8_resnet_confusion_matrix.png" alt="Confusion matrix for the ResNet50 model, shown as percentages of the test set: 70.25% true positive, 26.02% true negative, 2.72% false positive, 1.01% false negative.">
+      <figcaption>Table 8: Confusion Matrix for ResNet, with only 1.01% of cases as false negatives</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What I Learned</h2>
+    <p>I learned that in a clinical setting, simple accuracy is less important than recall, since missing a sick patient can be fatal. I also had to navigate significant computational limits, which taught me to use existing research to strategically narrow my focus before beginning the intensive training process.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Afiqah Kamaruddin · <a href="index.html">Back to portfolio</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

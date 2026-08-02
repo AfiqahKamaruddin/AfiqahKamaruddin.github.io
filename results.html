@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results Dashboard — Afiqah Kamaruddin</title>
+<meta name="description" content="Summary results dashboard for Afiqah Kamaruddin's health data science projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122A2E;
+    --paper:#F4F1E9;
+    --paper-raised:#FFFFFF;
+    --teal:#2C6E68;
+    --teal-deep:#193F3C;
+    --signal:#C98A2C;
+    --line:rgba(18,42,46,0.14);
+    --muted:#5B6E6C;
+    --display: 'Fraunces', serif;
+    --body: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 28px;}
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,241,233,0.88); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; justify-content:space-between; align-items:center; height:64px;}
+  .nav-name{font-family:var(--mono); font-size:13px;}
+  .back-link{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); text-decoration:none;}
+  .back-link:hover{color:var(--teal-deep);}
+
+  header{padding:64px 0 40px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:20px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1{
+    font-family:var(--display); font-weight:600; font-size:clamp(32px,5vw,48px);
+    color:var(--teal-deep); line-height:1.05;
+  }
+  .lede{font-size:17px; color:var(--muted); max-width:640px; margin-top:18px; text-align:justify;}
+
+  .note{
+    margin-top:28px; padding:16px 20px; background:var(--paper-raised);
+    border:1px solid var(--line); border-radius:6px; font-size:13.5px; color:var(--muted);
+  }
+  .note b{color:var(--teal-deep);}
+
+  section{padding:48px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:32px;}
+  .section-num{font-family:var(--mono); font-size:12px; color:var(--signal);}
+  h2{font-family:var(--display); font-size:24px; font-weight:600; color:var(--teal-deep);}
+  .section-sub{color:var(--muted); font-size:14px; margin-top:-22px; margin-bottom:28px;}
+
+  .ring-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;
+  }
+  @media(max-width:820px){ .ring-grid{grid-template-columns:repeat(2, 1fr);} }
+  @media(max-width:480px){ .ring-grid{grid-template-columns:1fr;} }
+  .ring-card{
+    position:relative;
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:8px;
+    padding:26px 20px; text-align:center;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+    cursor:default;
+  }
+  .ring-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 24px rgba(18,42,46,0.08);
+  }
+  .ring-card svg{width:120px; height:120px; margin:0 auto 14px;}
+  .ring-value{font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:600; fill:var(--teal-deep);}
+  .ring-card h3{font-family:var(--display); font-size:15.5px; font-weight:600; color:var(--teal-deep); margin-bottom:6px;}
+  .ring-card p{font-family:var(--mono); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em;}
+  .ring-card .sub{margin-top:6px; font-family:var(--body); font-size:12.5px; color:var(--muted); text-transform:none; letter-spacing:0;}
+
+  .ring-tooltip{
+    position:absolute; left:50%; top:calc(100% + 8px); transform:translateX(-50%) translateY(-4px);
+    background:var(--teal-deep); color:#fff; font-family:var(--body); font-size:12px;
+    padding:9px 12px; border-radius:6px; width:200px; text-align:left; line-height:1.4;
+    opacity:0; pointer-events:none; transition:opacity 0.18s ease, transform 0.18s ease;
+    z-index:10;
+  }
+  .ring-tooltip::after{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:var(--teal-deep);
+  }
+  .ring-card:hover .ring-tooltip{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  .ring-progress{transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);}
+
+  .qual-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+  }
+  @media(max-width:820px){ .qual-grid{grid-template-columns:repeat(2, 1fr);} }
+  @media(max-width:480px){ .qual-grid{grid-template-columns:1fr;} }
+  .qual-card{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:22px 20px;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .qual-card:hover{transform:translateY(-5px); box-shadow:0 12px 24px rgba(18,42,46,0.08);}
+  .qual-card .icon{
+    width:38px; height:38px; border-radius:9px; background:rgba(44,110,104,0.08); color:var(--signal);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .qual-card .icon svg{width:19px; height:19px;}
+  .qual-card h3{font-family:var(--display); font-size:16px; font-weight:600; color:var(--teal-deep); margin-bottom:6px;}
+  .qual-card p{font-size:13.5px; color:var(--muted);}
+  .status-badge{
+    font-family:var(--mono); font-size:9.5px; text-transform:uppercase; letter-spacing:0.07em;
+    color:var(--signal); border:1px solid var(--signal); padding:2px 7px; border-radius:20px; font-weight:500;
+    display:inline-block; margin-bottom:8px;
+  }
+
+  /* CALCULATOR */
+  .calc-wrap{
+    display:grid; grid-template-columns:1fr 260px; gap:36px; background:var(--paper-raised);
+    border:1px solid var(--line); border-radius:10px; padding:32px;
+  }
+  @media(max-width:720px){.calc-wrap{grid-template-columns:1fr;}}
+  .calc-field{margin-bottom:20px;}
+  .calc-field label{
+    display:flex; justify-content:space-between; font-family:var(--mono); font-size:12px;
+    text-transform:uppercase; letter-spacing:0.05em; color:var(--teal-deep); margin-bottom:8px;
+  }
+  .calc-field label span{color:var(--signal); font-weight:600;}
+  .calc-field input[type="range"]{
+    width:100%; accent-color:var(--signal); cursor:pointer;
+  }
+  .toggle-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .toggle-btn{
+    font-family:var(--body); font-size:13px; padding:8px 14px; border-radius:20px;
+    border:1px solid var(--line); background:transparent; color:var(--muted); cursor:pointer;
+    transition:all 0.15s ease;
+  }
+  .toggle-btn.active{
+    background:var(--teal-deep); color:#fff; border-color:var(--teal-deep);
+  }
+  .calc-result{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+  }
+  .calc-result svg{width:160px; height:160px;}
+  .calc-result-value{font-family:'JetBrains Mono',monospace; font-size:26px; font-weight:600;}
+  .calc-result-label{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--muted); margin-top:14px;
+  }
+  .calc-result-tier{
+    font-family:var(--display); font-size:19px; font-weight:600; margin-top:6px;
+  }
+  .disclaimer{
+    margin-top:24px; padding:14px 18px; background:rgba(201,138,44,0.08);
+    border:1px solid rgba(201,138,44,0.3); border-radius:6px; font-size:12.5px; color:var(--muted);
+  }
+  .disclaimer b{color:var(--signal);}
+
+  footer{padding:56px 0 60px; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  footer a{color:var(--teal); text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">AFIQAH K.</div>
+    <a class="back-link" href="index.html">← Back to portfolio</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Results Dashboard</div>
+    <h1>Project results, at a glance.</h1>
+    <p class="lede">A summary view of headline metrics across my health data science projects, from clinical prediction models to operational analytics.</p>
+    <div class="note">
+      <b>On code and data:</b> Several of these projects use confidential clinical or operational data (NHS patient records, hospital operations data) that cannot be shared publicly. The metrics below are the results already disclosed on the main portfolio page. For projects using public datasets, code is linked where available. Happy to discuss methodology directly, just reach out via the contact details on the main page.
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">01</span><h2>Model Performance</h2></div>
+    <p class="section-sub">Hover a card for more detail.</p>
+    <div class="ring-grid">
+
+      <div class="ring-card">
+        <div class="ring-tooltip">Benchmarked six ML algorithms on 179,824 clinical records from 450+ COVID-19 patients. XGBoost performed best for severe Stage 3 AKI.</div>
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(44,110,104,0.12)" stroke-width="9"/>
+          <circle class="ring-progress" data-target="308.76" cx="60" cy="60" r="54" fill="none" stroke="#C98A2C" stroke-width="9" stroke-linecap="round"
+            stroke-dasharray="339.29" stroke-dashoffset="339.29" transform="rotate(-90 60 60)"/>
+          <text x="60" y="66" text-anchor="middle" class="ring-value">0.91</text>
+        </svg>
+        <h3>AKI Prediction</h3>
+        <p>AUC — Stage 3 (XGBoost)</p>
+      </div>
+
+      <div class="ring-card">
+        <div class="ring-tooltip">4,981 patient records, 10 clinical/demographic variables. Random Forest reached zero false negatives on the test set.</div>
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(44,110,104,0.12)" stroke-width="9"/>
+          <circle class="ring-progress" data-target="336.58" cx="60" cy="60" r="54" fill="none" stroke="#C98A2C" stroke-width="9" stroke-linecap="round"
+            stroke-dasharray="339.29" stroke-dashoffset="339.29" transform="rotate(-90 60 60)"/>
+          <text x="60" y="66" text-anchor="middle" class="ring-value">99.2%</text>
+        </svg>
+        <h3>Stroke Risk</h3>
+        <p>Accuracy — Random Forest</p>
+      </div>
+
+      <div class="ring-card">
+        <div class="ring-tooltip">5,856 paediatric chest X-rays. ResNet50 outperformed custom CNNs, AlexNet, and DenseNet-201, validated with 5-fold cross-validation.</div>
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(44,110,104,0.12)" stroke-width="9"/>
+          <circle class="ring-progress" data-target="334.54" cx="60" cy="60" r="54" fill="none" stroke="#C98A2C" stroke-width="9" stroke-linecap="round"
+            stroke-dasharray="339.29" stroke-dashoffset="339.29" transform="rotate(-90 60 60)"/>
+          <text x="60" y="66" text-anchor="middle" class="ring-value">98.6%</text>
+        </svg>
+        <h3>Pneumonia Detection</h3>
+        <p>Recall — ResNet50</p>
+        <div class="sub">96.3% accuracy overall</div>
+      </div>
+
+      <div class="ring-card">
+        <div class="ring-tooltip">Grey ring shows the 95% NHS target. Amber shows actual measured capability, 15.7 points below target.</div>
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(44,110,104,0.12)" stroke-width="9"/>
+          <circle class="ring-progress" data-target="322.33" cx="60" cy="60" r="54" fill="none" stroke="rgba(44,110,104,0.35)" stroke-width="9" stroke-linecap="round"
+            stroke-dasharray="339.29" stroke-dashoffset="339.29" transform="rotate(-90 60 60)"/>
+          <circle class="ring-progress" data-target="268.99" cx="60" cy="60" r="54" fill="none" stroke="#C98A2C" stroke-width="9" stroke-linecap="round"
+            stroke-dasharray="339.29" stroke-dashoffset="339.29" transform="rotate(-90 60 60)"/>
+          <text x="60" y="66" text-anchor="middle" class="ring-value">79.3%</text>
+        </svg>
+        <h3>ED Performance</h3>
+        <p>Process Capability</p>
+        <div class="sub">vs. 95% target (grey)</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">02</span><h2>Other Projects</h2></div>
+    <div class="qual-grid">
+
+      <div class="qual-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="6" rx="3"/><line x1="12" y1="9" x2="12" y2="15"/></svg></div>
+        <h3>CT Reconstruction</h3>
+        <p>Compared 3 reconstruction algorithms (FDK, CGLS, SIRT) at data levels down to 5% of full projections.</p>
+      </div>
+
+      <div class="qual-card">
+        <span class="status-badge">In Progress</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10v1a7 7 0 0 0 14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
+        <h3>Stroke Documentation STT</h3>
+        <p>Speech-to-text and LLM pipeline for pre-hospital clinical documentation. No published results yet.</p>
+      </div>
+
+      <div class="qual-card">
+        <span class="status-badge">In Progress</span>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></div>
+        <h3>Post-Stroke Rehab</h3>
+        <p>AI-driven digital rehabilitation platform using computer vision to estimate motor recovery without specialised sensors. Multi-site pilot testing planned.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">03</span><h2>Try It — Stroke Risk Estimator</h2></div>
+    <p class="section-sub">An illustrative demo inspired by the Stroke Risk Prediction project. Adjust the factors below.</p>
+
+    <div class="calc-wrap">
+      <div>
+        <div class="calc-field">
+          <label>Age <span id="ageVal">45</span></label>
+          <input type="range" id="ageInput" min="1" max="90" value="45">
+        </div>
+        <div class="calc-field">
+          <label>Average Glucose Level (mg/dL) <span id="glucoseVal">100</span></label>
+          <input type="range" id="glucoseInput" min="50" max="300" value="100">
+          <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:6px;">≈ <span id="glucoseMmol">5.6</span> mmol/L</div>
+        </div>
+        <div class="calc-field">
+          <label>Weight (kg) <span id="weightVal">65</span></label>
+          <input type="range" id="weightInput" min="30" max="150" value="65">
+        </div>
+        <div class="calc-field">
+          <label>Height (cm) <span id="heightVal">165</span></label>
+          <input type="range" id="heightInput" min="120" max="210" value="165">
+          <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:6px;">Calculated BMI: <span id="bmiVal">23.9</span></div>
+        </div>
+        <div class="calc-field">
+          <label>Hypertension</label>
+          <div class="toggle-row">
+            <button class="toggle-btn active" data-field="hypertension" data-value="0">No</button>
+            <button class="toggle-btn" data-field="hypertension" data-value="1">Yes</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Heart Disease</label>
+          <div class="toggle-row">
+            <button class="toggle-btn active" data-field="heart" data-value="0">No</button>
+            <button class="toggle-btn" data-field="heart" data-value="1">Yes</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Smoking Status</label>
+          <div class="toggle-row">
+            <button class="toggle-btn active" data-field="smoking" data-value="0">Never smoked</button>
+            <button class="toggle-btn" data-field="smoking" data-value="1">Formerly smoked</button>
+            <button class="toggle-btn" data-field="smoking" data-value="2">Smokes</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(44,110,104,0.12)" stroke-width="9"/>
+          <circle id="calcRing" cx="60" cy="60" r="54" fill="none" stroke="#C98A2C" stroke-width="9" stroke-linecap="round"
+            stroke-dasharray="339.29" stroke-dashoffset="339.29" transform="rotate(-90 60 60)"
+            style="transition:stroke-dashoffset 0.5s ease, stroke 0.3s ease;"/>
+          <text id="calcValue" x="60" y="66" text-anchor="middle" class="ring-value">—</text>
+        </svg>
+        <div class="calc-result-label">Illustrative Risk Score</div>
+        <div id="calcTier" class="calc-result-tier" style="color:var(--teal-deep);">—</div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <b>Illustrative demo only.</b> This calculator uses a simplified, publicly-documented scoring approach based on general stroke risk factors (age, hypertension, heart disease, glucose, BMI, smoking) for demonstration purposes. It is not the exact trained model from the dissertation project, has not been clinically validated, and must not be used for medical decision-making.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Afiqah Kamaruddin · <a href="index.html">Back to portfolio</a></p>
+  </div>
+</footer>
+
+<script>
+// Animate rings into view
+const rings = document.querySelectorAll('.ring-progress');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const circle = entry.target;
+      const target = parseFloat(circle.dataset.target);
+      const full = 339.29;
+      circle.style.strokeDashoffset = full - target;
+      observer.unobserve(circle);
+    }
+  });
+}, { threshold: 0.3 });
+rings.forEach(r => observer.observe(r));
+
+// Toggle buttons
+const state = { hypertension: 0, heart: 0, smoking: 0 };
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const field = btn.dataset.field;
+    const value = parseInt(btn.dataset.value);
+    state[field] = value;
+    document.querySelectorAll(`.toggle-btn[data-field="${field}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateCalc();
+  });
+});
+
+const ageInput = document.getElementById('ageInput');
+const glucoseInput = document.getElementById('glucoseInput');
+const weightInput = document.getElementById('weightInput');
+const heightInput = document.getElementById('heightInput');
+[ageInput, glucoseInput, weightInput, heightInput].forEach(el => el.addEventListener('input', updateCalc));
+
+function updateCalc(){
+  const age = parseInt(ageInput.value);
+  const glucose = parseInt(glucoseInput.value);
+  const weight = parseInt(weightInput.value);
+  const height = parseInt(heightInput.value);
+  const bmi = weight / Math.pow(height / 100, 2);
+
+  document.getElementById('ageVal').textContent = age;
+  document.getElementById('glucoseVal').textContent = glucose;
+  document.getElementById('glucoseMmol').textContent = (glucose / 18.0182).toFixed(1);
+  document.getElementById('weightVal').textContent = weight;
+  document.getElementById('heightVal').textContent = height;
+  document.getElementById('bmiVal').textContent = bmi.toFixed(1);
+
+  let score = 0;
+  score += Math.min(age / 90, 1) * 40;
+  score += state.hypertension * 15;
+  score += state.heart * 15;
+  score += glucose > 140 ? 12 : (glucose > 110 ? 6 : 0);
+  score += bmi > 30 ? 6 : 0;
+  score += state.smoking === 2 ? 10 : (state.smoking === 1 ? 4 : 0);
+  score = Math.min(Math.round(score), 100);
+
+  const full = 339.29;
+  const offset = full - (full * score / 100);
+  const ring = document.getElementById('calcRing');
+  ring.style.strokeDashoffset = offset;
+
+  document.getElementById('calcValue').textContent = score + '%';
+
+  const tierEl = document.getElementById('calcTier');
+  let tier, color;
+  if (score < 30) { tier = 'Lower Risk Range'; color = '#2C6E68'; }
+  else if (score < 60) { tier = 'Moderate Risk Range'; color = '#C98A2C'; }
+  else { tier = 'Higher Risk Range'; color = '#B0472E'; }
+  tierEl.textContent = tier;
+  tierEl.style.color = color;
+  ring.setAttribute('stroke', color);
+}
+updateCalc();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Predicting Stroke Risk with Machine Learning · Afiqah Kamaruddin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122A2E; --paper:#F4F1E9; --paper-raised:#FFFFFF;
+    --teal:#2C6E68; --teal-deep:#193F3C; --signal:#C98A2C;
+    --line:rgba(18,42,46,0.14); --muted:#5B6E6C;
+    --display: 'Fraunces', serif; --body: 'Inter', -apple-system, sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.65; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 28px;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(244,241,233,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{max-width:960px; display:flex; justify-content:space-between; align-items:center; height:64px;}
+  .nav-name{font-family:var(--mono); font-size:13px;}
+  .back-link{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); text-decoration:none;}
+  .back-link:hover{color:var(--teal-deep);}
+
+  header{padding:56px 0 32px;}
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1{font-family:var(--display); font-weight:600; font-size:clamp(28px,4.5vw,40px); color:var(--teal-deep); line-height:1.15;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:36px 0;}
+  @media(max-width:600px){.stat-row{grid-template-columns:1fr;}}
+  .stat-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:20px; text-align:center;}
+  .stat-card .num{font-family:var(--mono); font-size:26px; font-weight:600; color:var(--signal);}
+  .stat-card .lbl{font-size:12.5px; color:var(--muted); margin-top:6px;}
+
+  section{padding:36px 0; border-top:1px solid var(--line);}
+  h2{font-family:var(--display); font-size:21px; font-weight:600; color:var(--teal-deep); margin-bottom:14px;}
+  p{font-size:15.5px; color:var(--ink); text-align:justify; margin-bottom:14px;}
+  ul{margin:14px 0 14px 20px;}
+  li{font-size:15.5px; color:var(--ink); margin-bottom:8px; text-align:justify;}
+  li b{color:var(--teal-deep);}
+
+  figure{margin:28px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:8px; background:#fff;}
+  figcaption{font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:10px; text-align:left;}
+  .fig-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:600px){.fig-row{grid-template-columns:1fr;}}
+
+  footer{padding:48px 0 56px; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  footer a{color:var(--teal); text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">AFIQAH K.</div>
+    <a class="back-link" href="index.html">← Back to portfolio</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Case Study</div>
+    <h1>Predicting Stroke Risk with Machine Learning</h1>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="num">99.2%</div><div class="lbl">Accuracy (Random Forest)</div></div>
+      <div class="stat-card"><div class="num">0</div><div class="lbl">False Negatives</div></div>
+      <div class="stat-card"><div class="num">94.9→99%</div><div class="lbl">Improvement After Balancing Data</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The Problem</h2>
+    <p>Stroke is a leading cause of death and long-term disability globally, making early detection a critical medical priority. Because brain cells begin to die the moment a stroke starts, having a reliable way to predict risk can lead to life-saving interventions. I wanted to see if machine learning could help clinicians identify high-risk patients by analysing common health indicators.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>My Approach</h2>
+    <p>As part of a four-person university research project, I used a public dataset containing nearly 5,000 patient records, including health factors like age, BMI, and glucose levels. I compared five different algorithms, ranging from Logistic Regression to more complex ensemble models like Random Forest and XGBoost, to find the most effective predictor. A major technical challenge was that only 5% of the patients had actually suffered a stroke; to address this, I used an oversampling technique to balance the data so the model could learn the warning signs of a stroke more effectively.</p>
+
+    <figure>
+      <img src="assets/stroke/fig1_pipeline_overview.png" alt="Pipeline diagram: stroke dataset retrieval, data preprocessing, machine learning algorithm modelling, model evaluation and tuning, and model evaluation metrics.">
+      <figcaption>Figure 1: End-to-end workflow, from raw stroke dataset through preprocessing, modelling, and evaluation</figcaption>
+    </figure>
+
+    <figure>
+      <img style="max-width:600px;" src="assets/stroke/fig4_numerical_distributions.png" alt="Distribution plots for age, BMI, and average glucose level">
+      <figcaption>Figure 4: Distribution of age, BMI, and average glucose level, split by stroke outcome</figcaption>
+    </figure>
+
+    <figure>
+      <img style="max-width:600px;" src="assets/stroke/fig5_categorical_countplots.png" alt="Countplots of categorical variables against stroke outcome">
+      <figcaption>Figure 5: Exploratory analysis of how categorical health and lifestyle factors relate to stroke outcome</figcaption>
+    </figure>
+
+    <figure>
+      <img src="assets/stroke/fig6_correlation_matrix.png" alt="Correlation matrix heatmap of stroke dataset variables, with stroke most positively correlated with age, hypertension, heart disease, and marital status.">
+      <figcaption>Figure 6: Correlation matrix from the EDA stage, showing stroke correlates most with age, hypertension, heart disease, and average glucose level, informing which features mattered most for the classifier</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Key Results</h2>
+    <ul>
+      <li><b>Top-tier accuracy:</b> the Random Forest model emerged as the most successful, achieving a 99.2% accuracy rate in its predictions.</li>
+      <li><b>Zero missed cases:</b> most importantly, the final model achieved zero false negatives, meaning it successfully flagged every single stroke case in the test data.</li>
+      <li><b>Performance boost:</b> by specifically addressing the data imbalance, I improved the model's reliability from 94.9% to over 99%.</li>
+    </ul>
+
+    <figure>
+      <img src="assets/stroke/fig16_lr_confusion_matrix.png" alt="Confusion matrix for the baseline Logistic Regression model, showing 178 false negatives out of 948 actual stroke cases.">
+      <figcaption>Figure 16: Confusion matrix for the baseline Logistic Regression model, which missed 178 real stroke cases (false negatives): the gap Random Forest closed to zero</figcaption>
+    </figure>
+
+    <figure>
+      <img style="max-width:600px;" src="assets/stroke/fig25_rf_confusion_matrix.png" alt="Confusion matrix for the Random Forest model">
+      <figcaption>Figure 25: Confusion matrix for the Random Forest model, with every stroke case in the test set correctly flagged (zero false negatives)</figcaption>
+    </figure>
+
+    <figure>
+      <img style="max-width:600px;" src="assets/stroke/fig26_rf_roc_curve.png" alt="Figure 26: ROC curve for the Random Forest model">
+      <figcaption>Figure 26: ROC curve for the Random Forest model</figcaption>
+    </figure>
+
+    <figure>
+      <img src="assets/stroke/fig24_rf_classification_report.png" alt="Classification report for the Random Forest model showing 0.99 precision, recall, and f1-score for both stroke and non-stroke classes across 1,894 test samples.">
+      <figcaption>Figure 24: Full classification report for the Random Forest model, showing 0.99 precision, recall, and f1-score for both classes on the 1,894-sample test set</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What I Learned</h2>
+    <p>I realised that in medical AI, technical accuracy must be balanced with clinical safety. It's far better to have a few false alarms than to miss a life-threatening event entirely. Navigating the constraints of a small, imbalanced dataset taught me how to prioritise the metrics that matter most to doctors and patients, not just the ones that look best on paper.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Afiqah Kamaruddin · <a href="index.html">Back to portfolio</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

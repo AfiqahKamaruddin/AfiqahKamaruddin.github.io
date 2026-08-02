@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Emergency Department Performance Improvement · Afiqah Kamaruddin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122A2E; --paper:#F4F1E9; --paper-raised:#FFFFFF;
+    --teal:#2C6E68; --teal-deep:#193F3C; --signal:#C98A2C;
+    --line:rgba(18,42,46,0.14); --muted:#5B6E6C;
+    --display: 'Fraunces', serif; --body: 'Inter', -apple-system, sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.65; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 28px;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(244,241,233,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{max-width:960px; display:flex; justify-content:space-between; align-items:center; height:64px;}
+  .nav-name{font-family:var(--mono); font-size:13px;}
+  .back-link{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); text-decoration:none;}
+  .back-link:hover{color:var(--teal-deep);}
+
+  header{padding:56px 0 32px;}
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1{font-family:var(--display); font-weight:600; font-size:clamp(28px,4.5vw,40px); color:var(--teal-deep); line-height:1.15;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:36px 0;}
+  @media(max-width:600px){.stat-row{grid-template-columns:1fr;}}
+  .stat-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:20px; text-align:center;}
+  .stat-card .num{font-family:var(--mono); font-size:26px; font-weight:600; color:var(--signal);}
+  .stat-card .lbl{font-size:12.5px; color:var(--muted); margin-top:6px;}
+
+  section{padding:36px 0; border-top:1px solid var(--line);}
+  h2{font-family:var(--display); font-size:21px; font-weight:600; color:var(--teal-deep); margin-bottom:14px;}
+  p{font-size:15.5px; color:var(--ink); text-align:justify; margin-bottom:14px;}
+  ul{margin:14px 0 14px 20px;}
+  li{font-size:15.5px; color:var(--ink); margin-bottom:8px; text-align:justify;}
+  li b{color:var(--teal-deep);}
+
+  figure{margin:28px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:8px; background:#fff;}
+  figcaption{font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:10px; text-align:left;}
+  .fig-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:600px){.fig-row{grid-template-columns:1fr;}}
+
+  footer{padding:48px 0 56px; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  footer a{color:var(--teal); text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">AFIQAH K.</div>
+    <a class="back-link" href="index.html">← Back to portfolio</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Case Study</div>
+    <h1>Emergency Department Performance Improvement</h1>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="num">79.28%</div><div class="lbl">4-hour ED process capability (vs 95% target)</div></div>
+      <div class="stat-card"><div class="num">56.99%</div><div class="lbl">Capability for ambulance arrivals, the weakest pathway</div></div>
+      <div class="stat-card"><div class="num">700+ min</div><div class="lbl">Worst-case waits identified</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The Problem</h2>
+    <p>A 1,000-bed acute care hospital handling over 80,000 ED patients a year was falling short of two linked NHS quality indicators: the 4-hour ED standard (95% of patients admitted, transferred, or discharged within 4 hours) and the 90/90 stroke care standard. These aren't just administrative targets. For stroke in particular, minutes matter for long-term recovery, and the two indicators interact: delays in the ED can cascade into delays for time-critical stroke patients.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>My Approach</h2>
+    <p>I mapped and compared the hospital's actual stroke-care protocol against national guideline flowcharts to identify where extra handoffs and decision points were adding risk of delay. In parallel, I analysed the hospital's ED attendance dataset in MATLAB: building statistical process control (SPC) charts to check whether wait times were "in control," calculating process capability indices against the 4-hour upper specification limit, and testing normality of the wait-time distribution (Anderson-Darling). I then broke total wait down by process stage, arrival mode, source of referral, and disposal pathway to isolate exactly where the 4-hour target was being lost, and ran Spearman's rank correlation on the separate stroke dataset to check how patient and pathway variables related to timely stroke ward admission.</p>
+
+    <figure>
+      <img src="assets/ed-performance/fig3_spc_chart.png" alt="Statistical process control charts (individuals and moving range) for ED 4-hour wait time, showing multiple points beyond the upper control limit.">
+      <figcaption>Figure 3: SPC charts for the ED 4-hour QI. Several waits spike well above the upper control limit (red circles), including points near or above 900 minutes, showing the process was not consistently in statistical control.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Key Results</h2>
+
+    <figure>
+      <img src="assets/ed-performance/fig4_process_capability.png" alt="Process capability distribution plot showing 79.28% of patients treated and discharged within the 4-hour window, against a 95% target.">
+      <figcaption>Figure 4: Only 79.28% of patients were seen, treated, and discharged within 4 hours, well short of the hospital's 95% target, with a long tail of waits extending past 1,000 minutes.</figcaption>
+    </figure>
+
+    <ul>
+      <li><b>Overall capability gap:</b> the ED met the 4-hour standard for only 79.28% of patients against a 95% target, with wait-time data confirmed as non-normally distributed (Anderson-Darling p = 0.0005) and right-skewed by a small number of extreme delays.</li>
+      <li><b>Arrival mode was the biggest driver:</b> patients brought in by ambulance had by far the worst process capability (56.99%) and the highest concentration of long waits, some exceeding 700 minutes; walk-in patients were the next weakest group.</li>
+      <li><b>Bed availability was the second bottleneck:</b> among disposal pathways, patients waiting to be admitted to a hospital bed ("lodged patients") had the lowest capability (53.70%), pointing to downstream bed capacity, not the ED itself, as a major constraint.</li>
+    </ul>
+
+    <figure>
+      <img src="assets/ed-performance/fig7_capability_summary.png" alt="Bar chart comparing process capability across total wait, arrival mode, source of referral, disposal pathway, presentation, and investigation stages.">
+      <figcaption>Figure 7: Breaking the 4-hour target down by process stage shows most sub-processes performing near or above 90%, isolating total wait, arrival mode, and disposal pathway as the real drags on performance.</figcaption>
+    </figure>
+
+    <div class="fig-row">
+      <figure>
+        <img src="assets/ed-performance/fig8_arrival_bubble.png" alt="Bubble chart of total wait time by arrival mode and arrival time of day, with ambulance and walk-in arrivals showing the largest and longest-waiting bubbles.">
+        <figcaption>Figure 8: Ambulance and walk-in patients (bottom two rows) show the largest, longest-wait bubbles, and tend to arrive earlier in the day when the ED is under more pressure.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ed-performance/fig9_arrival_capability.png" alt="Four-panel process capability plots comparing ambulance, walk-in, other, and private-transport arrival modes.">
+        <figcaption>Figure 9: Capability by arrival mode. Ambulance arrivals (top left, 56.99%) trail every other route, including a long tail out to 1,000+ minutes.</figcaption>
+      </figure>
+    </div>
+
+    <figure>
+      <img src="assets/ed-performance/fig11_disposal_capability.png" alt="Nine-panel process capability plots for each disposal pathway, with admission to a hospital bed showing the lowest capability at 53.70%.">
+      <figcaption>Figure 11: Capability by disposal pathway. "Admit to hospital bed / became a lodged patient" (top left, 53.70%) is the weakest of all nine pathways and has the longest tail of extreme waits, consistent with a bed-capacity bottleneck downstream of the ED.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What I Learned</h2>
+    <p>The data made clear that the ED's 4-hour problem wasn't really an "ED" problem in isolation; it was concentrated in exactly two places: how ambulance and walk-in patients are triaged on arrival, and how quickly a hospital bed becomes available once a decision to admit is made. That reframed my recommendations: dedicated care pathways and prioritised triage for ambulance/walk-in arrivals, plus a bed-capacity and disposal-pathway review, rather than a generic "speed up the ED" intervention. I also proposed an ED–Radiology pre-alert system and stroke-specific registration to shorten the stroke pathway, since the same arrival-mode and bed-availability pressures that hurt the 4-hour target also delay stroke patients reaching the specialised unit in time for the 90/90 indicator. It reinforced for me that process capability analysis is only useful once you decompose it by pathway: the aggregate number tells you there's a problem, but the breakdown tells you where to intervene.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Afiqah Kamaruddin · <a href="index.html">Back to portfolio</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

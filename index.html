@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afiqah Kamaruddin | Health Data Scientist</title>
+<meta name="description" content="Afiqah Kamaruddin: Health data scientist working across EHR-derived data, clinical outcome modelling, and explainable AI in healthcare.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122A2E;
+    --paper:#F4F1E9;
+    --paper-raised:#FFFFFF;
+    --teal:#2C6E68;
+    --teal-deep:#193F3C;
+    --signal:#C98A2C;
+    --line:rgba(18,42,46,0.14);
+    --muted:#5B6E6C;
+    --display: 'Fraunces', serif;
+    --body: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,241,233,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; justify-content:space-between; align-items:center; height:64px;}
+  .nav-name{font-family:var(--mono); font-size:13px; letter-spacing:0.02em;}
+  nav ul{display:flex; list-style:none; gap:28px;}
+  nav ul li a{
+    font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em;
+    text-decoration:none; color:var(--muted); transition:color 0.2s;
+  }
+  nav ul li a:hover{color:var(--teal-deep);}
+  @media(max-width:640px){ nav ul{gap:14px;} nav ul li a{font-size:10px;} }
+
+  /* HERO */
+  header.hero{padding:88px 0 56px; position:relative;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:22px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1{
+    font-family:var(--display); font-weight:600; font-size:clamp(40px,7vw,68px);
+    line-height:1.02; letter-spacing:-0.01em; color:var(--teal-deep);
+  }
+  .tagline{
+    font-size:19px; color:var(--muted); max-width:100%; margin-top:22px; font-weight:400; text-align:justify;
+  }
+
+  /* SIGNAL TRACE: biomarker sparkline built from real project metrics */
+  .trace-wrap{margin-top:44px; padding-top:28px; border-top:1px solid var(--line);}
+  .trace-svg{width:100%; height:auto; display:block;}
+  .trace-labels{display:flex; justify-content:space-between; margin-top:10px; font-family:var(--mono); font-size:11px; color:var(--muted);}
+  .trace-labels span b{color:var(--teal-deep); font-weight:500;}
+
+  /* SECTION SHELL */
+  section{padding:64px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:34px;}
+  .section-num{font-family:var(--mono); font-size:12px; color:var(--signal);}
+  h2{font-family:var(--display); font-size:28px; font-weight:600; color:var(--teal-deep);}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:48px;}
+  @media(max-width:720px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{margin-bottom:16px; color:var(--ink); max-width:100%; text-align:justify;}
+  .about-text p:first-child{font-size:18px; font-family:var(--display); font-weight:400; color:var(--teal-deep);}
+  .facts{font-family:var(--mono); font-size:13px;}
+  .facts dt{color:var(--muted); margin-top:16px; text-transform:uppercase; letter-spacing:0.06em; font-size:11px;}
+  .facts dd{color:var(--ink); margin-top:3px;}
+  .facts dt:first-child{margin-top:0;}
+
+  /* PROJECTS */
+  .project{
+    display:grid; grid-template-columns:100px 1fr; gap:24px;
+    padding:26px 0; border-bottom:1px solid var(--line);
+  }
+  .project:last-child{border-bottom:none;}
+  .project-metric{
+    font-family:var(--mono); font-size:26px; font-weight:500; color:var(--signal); line-height:1.1;
+  }
+  .project-metric small{display:block; font-size:10px; color:var(--muted); font-weight:400; margin-top:4px; text-transform:uppercase; letter-spacing:0.05em;}
+  .project-icon{
+    width:52px; height:52px; border-radius:12px;
+    background:rgba(44,110,104,0.08); color:var(--signal);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:12px;
+  }
+  .project-icon svg{width:27px; height:27px;}
+  .project-title{font-family:var(--display); font-size:20px; font-weight:600; color:var(--teal-deep); margin-bottom:6px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .status-badge{
+    font-family:var(--mono); font-size:9.5px; text-transform:uppercase; letter-spacing:0.07em;
+    color:var(--signal); border:1px solid var(--signal); padding:2px 7px; border-radius:20px;
+    font-weight:500;
+  }
+  .project-desc{color:var(--muted); font-size:15px; max-width:100%; text-align:justify;}
+  .project-tags{margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;}
+  .project-tags span{
+    font-family:var(--mono); font-size:10.5px; color:var(--teal-deep);
+    background:rgba(44,110,104,0.08); padding:3px 8px; border-radius:3px;
+  }
+  .project-links{margin-top:12px;}
+  .project-links a{
+    font-family:var(--mono); font-size:12px; color:var(--teal);
+    text-decoration:underline; margin-right:18px;
+  }
+  @media(max-width:600px){.project{grid-template-columns:1fr;} .project-metric{flex-direction:row;}}
+
+  /* EXPERIENCE TIMELINE */
+  .timeline-item{display:grid; grid-template-columns:150px 1fr; gap:24px; padding:18px 0;}
+  .timeline-item + .timeline-item{border-top:1px solid var(--line);}
+  .timeline-date{font-family:var(--mono); font-size:12px; color:var(--muted); padding-top:2px;}
+  .timeline-role{font-weight:600; color:var(--teal-deep); font-size:16px;}
+  .timeline-org{color:var(--muted); font-size:14px; margin-top:2px;}
+  @media(max-width:600px){.timeline-item{grid-template-columns:1fr; gap:4px;}}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
+  .skills-grid .skill-cat:last-child:nth-child(odd){grid-column:1 / -1;}
+  @media(max-width:600px){.skills-grid{grid-template-columns:1fr;} .skills-grid .skill-cat:last-child:nth-child(odd){grid-column:auto;}}
+  .skill-cat h3{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--signal); margin-bottom:10px;}
+  .skill-cat p{color:var(--ink); font-size:14.5px;}
+
+  /* PUBLICATION */
+  .pub{background:var(--paper-raised); border:1px solid var(--line); padding:22px 24px; border-radius:4px;}
+  .pub-title{font-family:var(--display); font-size:17px; font-weight:600; color:var(--teal-deep); margin-bottom:6px;}
+  .pub-meta{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  .pub-meta a{color:var(--teal); text-decoration:underline;}
+
+  /* CONTACT */
+  footer{padding:70px 0 60px;}
+  footer .wrap{border-top:1px solid var(--line); padding-top:48px;}
+  .contact-lead{font-family:var(--display); font-size:26px; color:var(--teal-deep); max-width:100%; margin-bottom:34px; text-align:justify;}
+  .contact-grid{display:flex; flex-wrap:wrap; gap:32px;}
+  .contact-item dt{font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted);}
+  .contact-item dd{margin-top:4px; font-size:15px;}
+  .contact-item dd a{text-decoration:none; border-bottom:1px solid var(--teal); color:var(--teal-deep);}
+  .foot-note{margin-top:52px; font-family:var(--mono); font-size:11px; color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">AFIQAH K.</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="results.html">Results</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Health Data Science &amp; Clinical AI</div>
+    <h1>Afiqah<br>Kamaruddin</h1>
+    <p class="tagline">Building clinically defensible AI, from stroke and kidney injury prediction to emergency care and rehabilitation tools, with a background that spans the lab bench to the data science stack.</p>
+
+    <div class="trace-wrap">
+      <svg class="trace-svg" viewBox="0 0 860 90" preserveAspectRatio="none">
+        <polyline points="0,60 60,58 110,62 150,20 180,66 230,55 270,57 310,15 350,60 400,58 440,25 480,62 520,59 560,10 610,60 660,57 700,30 740,58 790,55 860,20"
+          fill="none" stroke="#2C6E68" stroke-width="1.6" opacity="0.55"/>
+        <circle cx="150" cy="20" r="3.5" fill="#C98A2C"/>
+        <circle cx="310" cy="15" r="3.5" fill="#C98A2C"/>
+        <circle cx="560" cy="10" r="3.5" fill="#C98A2C"/>
+        <circle cx="860" cy="20" r="3.5" fill="#C98A2C"/>
+      </svg>
+      <div class="trace-labels">
+        <span><b>99.2%</b> stroke risk model accuracy</span>
+        <span><b>SHAP</b>-explained AKI prediction</span>
+        <span><b>98.6%</b> recall (pneumonia detection)</span>
+        <span><b>2021</b> peer-reviewed publication</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Health data scientist working across clinical prediction, medical imaging and reconstruction, healthcare process improvement, and AI in emergency and post-acute care, with an eye for models clinicians can actually trust and use.</p>
+        <p>My path started at the lab bench: a degree in Medical Laboratory Technology, four years as a Senior Product Specialist in diagnostics technology, and time as a laboratory technologist. That clinical grounding still shapes how I approach data science today: I care less about squeezing out marginal accuracy than about models that are explainable, reproducible, and clinically defensible.</p>
+        <p>Since completing an MSc in Diagnostics, Data and Digital Health at the University of Warwick, I've worked across lecturing, research coordination, and digital health project coordination at KPJ Healthcare University, on projects spanning clinical prediction models, medical imaging and CT reconstruction, hospital process improvement, and AI-driven tools (including speech technology) for emergency and rehabilitation care. Always keen to connect with others working across health data, clinical analytics, and AI in healthcare.</p>
+      </div>
+      <dl class="facts">
+        <dt>Based in</dt><dd>United Kingdom &amp; Malaysia</dd>
+        <dt>Education</dt><dd>MSc Diagnostics, Data and Digital Health, University of Warwick</dd>
+        <dt></dt><dd>BSc Medical Laboratory Technology, UiTM Malaysia</dd>
+        <dt>Registrations</dt><dd>MAHPC · MBOT · Digital Health Malaysia (Member)</dd>
+        <dt>Interests</dt><dd>Digital health, clinical AI, explainable AI, causal inference, biomarkers, medical imaging &amp; CT reconstruction, clinical NLP &amp; speech technology, healthcare operations &amp; process improvement, digital rehabilitation, health system interoperability (HL7/FHIR), ICD-10 &amp; Casemix systems, health inequalities</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">02</span><h2>Research &amp; Projects</h2></div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10v1a7 7 0 0 0 14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
+      <div class="project-metric">STT<small>+ LLM pipeline</small></div>
+      </div>
+      <div>
+        <div class="project-title">AI Speech-to-Text for Pre-Hospital Stroke Documentation <span class="status-badge">In Progress</span></div>
+        <div class="project-desc">Developing a noise-robust speech-to-text and large language model pipeline to automate real-time clinical documentation during ambulance transit for stroke emergencies. Designed to handle noisy acoustic environments and multilingual, code-mixed speech, aiming to reduce door-to-needle time and enable seamless, hands-free data handover from ambulance to Emergency Department.</div>
+        <div class="project-tags"><span>Speech-to-Text</span><span>LLM</span><span>NLP</span><span>Emergency Medicine</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></div>
+      <div class="project-metric">86–93%<small>FMA score precision (CV)</small></div>
+      </div>
+      <div>
+        <div class="project-title">AI-Enabled Post-Stroke Rehabilitation Platform <span class="status-badge">In Progress</span></div>
+        <div class="project-desc">Designing and clinically evaluating an AI-driven digital rehabilitation platform to support post-stroke patients transitioning from hospital-based care to home recovery. Uses computer vision to estimate motor recovery scores with 86–93% precision without specialised sensors, paired with adaptive, difficulty-scaling exercises and caregiver-facing support tools. Multi-site pilot testing is planned across stroke rehabilitation centres.</div>
+        <div class="project-tags"><span>Computer Vision</span><span>Digital Health</span><span>Rehabilitation</span><span>Human-AI Interaction</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3h6v3H9z"/><polyline points="8 13 11 16 16 10"/></svg></div>
+      <div class="project-metric">Live<small>deployed app</small></div>
+      </div>
+      <div>
+        <div class="project-title">Student Grading System</div>
+        <div class="project-desc">Built and deployed a Streamlit-based grading application to support academic assessment, from initial concept to a functional, live tool. <a href="https://kpju-grading-system.streamlit.app/" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:underline;">View live app →</a></div>
+        <div class="project-tags"><span>Streamlit</span><span>Python</span><span>No-Code AI</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg></div>
+      <div class="project-metric">4<small>role-based dashboards</small></div>
+      </div>
+      <div>
+        <div class="project-title">OneHealth: Healthcare Management Platform</div>
+        <div class="project-desc">Designed and prototyped a full-stack healthcare management platform for Malaysian clinics and hospitals, with role-based dashboards for doctors, nurses, patients, and administrators, and bilingual support in English and Bahasa Melayu. Built out clinical tools (patient records, task tracking, shift handover, secure team chat), a patient-facing portal with an AI-assisted medication planner, and admin analytics with audit trails. Explored advanced capabilities including HL7/FHIR interoperability, telehealth integration, and offline support for rural use cases.</div>
+        <div class="project-tags"><span>Figma</span><span>Product Design</span><span>HL7/FHIR</span><span>Telehealth</span></div>
+        <div class="project-links"><a href="https://runny-wispy-01645391.figma.site/" target="_blank" rel="noopener">View prototype →</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><img src="data:image/png;base64,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" alt="Kidney icon" style="width:28px; height:auto; display:block;"></div>
+      <div class="project-metric">0.91<small>AUC (Stage 3 AKI, XGBoost)</small></div>
+      </div>
+      <div>
+        <div class="project-title">AKI Prediction in COVID-19 Patients</div>
+        <div class="project-desc">Analysed 179,824 clinical and laboratory records from over 450 COVID-19 patients at a UK NHS teaching hospital to predict the onset and stage of acute kidney injury. Benchmarked six ML algorithms; XGBoost performed best, reaching 0.91 AUC for severe Stage 3 AKI, and used SHAP to show creatinine, urea, age, and gender as the strongest predictors, with sodium emerging as a useful alternative when creatinine data was missing.</div>
+        <div class="project-tags"><span>XGBoost</span><span>Random Forest</span><span>SHAP</span><span>Biomarker Networks</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 4.5A3 3 0 0 0 6.5 7.5 3 3 0 0 0 4.5 12a3 3 0 0 0 2 5h1a3 3 0 0 0 3-3v-6a3 3 0 0 0-1-3.5z"/><path d="M14.5 4.5A3 3 0 0 1 17.5 7.5 3 3 0 0 1 19.5 12a3 3 0 0 1-2 5h-1a3 3 0 0 1-3-3v-6a3 3 0 0 1 1-3.5z"/></svg></div>
+      <div class="project-metric">99.2%<small>accuracy (Random Forest)</small></div>
+      </div>
+      <div>
+        <div class="project-title">Stroke Risk Prediction</div>
+        <div class="project-desc">Built a stroke risk classifier on 4,981 patient records across 10 clinical and demographic variables, addressing severe class imbalance (only 5% of patients had a stroke) using RandomOverSampler. Compared five algorithms; Random Forest performed best, reaching 99.2% accuracy with zero false negatives on the test set, prioritising sensitivity so no at-risk patient was missed.</div>
+        <div class="project-tags"><span>Random Forest</span><span>XGBoost</span><span>Class Imbalance</span><span>ROC AUC</span></div>
+        <div class="project-links"><a href="case-study-stroke.html">Read case study →</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5v6"/><path d="M10.5 9c-2 0-5 1-6 4-1.3 3.8-1 9 1 10.3 2 1.3 4.5 0 4.5-3V9.3"/><path d="M13.5 9c2 0 5 1 6 4 1.3 3.8 1 9-1 10.3-2 1.3-4.5 0-4.5-3V9.3"/></svg></div>
+      <div class="project-metric">98.6%<small>recall (ResNet50)</small></div>
+      </div>
+      <div>
+        <div class="project-title">Chest X-ray Pneumonia Detection</div>
+        <div class="project-desc">Built an automated pneumonia classifier for paediatric chest X-rays across 5,856 images, comparing custom CNNs against pre-trained ResNet50, AlexNet, and DenseNet-201. Used data augmentation and 5-fold cross-validation for robustness; ResNet50 performed best at 96.3% accuracy and 98.6% recall, prioritising recall to keep false negatives, and missed diagnoses, to a minimum. Also examined the cost-benefit and ethical questions around deploying such a tool in the NHS, including data privacy and algorithmic bias.</div>
+        <div class="project-tags"><span>TensorFlow</span><span>ResNet50</span><span>AlexNet</span><span>DenseNet</span></div>
+        <div class="project-links"><a href="case-study-pneumonia.html">Read case study →</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="6" rx="3"/><line x1="12" y1="9" x2="12" y2="15"/></svg></div>
+      <div class="project-metric">5%<small>of full projection data</small></div>
+      </div>
+      <div>
+        <div class="project-title">Limited-Data CT Reconstruction of a Pharmaceutical Tablet</div>
+        <div class="project-desc">Simulated reduced X-ray CT projections, down to 5% of the Nyquist number, on an ibuprofen tablet to study the trade-off between scan time and image quality. Compared FDK, CGLS, and SIRT reconstruction algorithms: CGLS best preserved edge detail under sparse data, while SIRT gave more consistent bead intensity for predicting drug release and dosage properties.</div>
+        <div class="project-tags"><span>MATLAB</span><span>Avizo</span><span>CT Reconstruction</span><span>Image Segmentation</span></div>
+        <div class="project-links"><a href="case-study-ct-tablet.html">Read case study →</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+      <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><line x1="12" y1="13" x2="12" y2="9"/><line x1="12" y1="13" x2="15" y2="14.5"/><line x1="9" y1="2" x2="15" y2="2"/></svg></div>
+      <div class="project-metric">79.28%<small>ED process capability (vs 95% target)</small></div>
+      </div>
+      <div>
+        <div class="project-title">Emergency Department Performance Improvement</div>
+        <div class="project-desc">Evaluated emergency department performance at a 1,000-bed hospital against the UK's 4-hour ED and 90/90 stroke care quality indicators. Used process mapping, Spearman's rank correlation, and SPC charts in MATLAB to calculate an ED process capability of 79.28% against a 95% target, identifying ambulance and walk-in arrivals, plus limited bed availability, as the main drivers of extended wait times, some exceeding 700 minutes. Proposed data-driven interventions, including specialised care pathways and an ED–Radiology pre-alert system.</div>
+        <div class="project-tags"><span>MATLAB</span><span>Process Mapping</span><span>SPC</span><span>Statistical Modelling</span></div>
+        <div class="project-links"><a href="case-study-ed-performance.html">Read case study →</a></div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <div class="pub">
+        <div class="pub-title">Peer-reviewed publication</div>
+        <div class="pub-meta">Saudi Journal of Biological Sciences, 2021 · DOI: <a href="https://doi.org/10.1016/j.sjbs.2021.01.030" target="_blank" rel="noopener">10.1016/j.sjbs.2021.01.030</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">03</span><h2>Experience</h2></div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2025</div>
+      <div>
+        <div class="timeline-role">Lecturer, School of Digital Health</div>
+        <div class="timeline-org">KPJ Healthcare University, Malaysia (also Curriculum Committee Member, Research Coordinator, and CPD Coordinator)</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2025</div>
+      <div>
+        <div class="timeline-role">Digital Health Data and AI Project Coordinator</div>
+        <div class="timeline-org">Centre of Digital Health, KPJ Healthcare University, Malaysia</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2019</div>
+      <div>
+        <div class="timeline-role">Senior Product Specialist</div>
+        <div class="timeline-org">All Eights (M) Sdn Bhd, healthcare diagnostics technology</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Earlier</div>
+      <div>
+        <div class="timeline-role">Medical Laboratory Technologist</div>
+        <div class="timeline-org">Hospital Canselor Tuanku Muhriz (HCTM), Kuala Lumpur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">04</span><h2>Skills &amp; Tools</h2></div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3>Languages &amp; Stats</h3>
+        <p>Python, R, Stata, SQL, MATLAB, SPSS</p>
+      </div>
+      <div class="skill-cat">
+        <h3>Modelling &amp; AI</h3>
+        <p>TensorFlow, Scikit-learn, XGBoost, Random Forest, Gradient Boosting, SHAP, CNN architectures (ResNet, AlexNet, DenseNet), computer vision, LLMs &amp; prompt engineering, speech-to-text (ASR), class imbalance handling (SMOTE, RandomOverSampler)</p>
+      </div>
+      <div class="skill-cat">
+        <h3>Medical Imaging &amp; Reconstruction</h3>
+        <p>CT reconstruction algorithms (FDK, CGLS, SIRT), Avizo (3D visualisation, segmentation &amp; thickness mapping), quantitative image analysis, chest X-ray &amp; CT image processing</p>
+      </div>
+      <div class="skill-cat">
+        <h3>Visualisation, BI &amp; Product Design</h3>
+        <p>Power BI, Tableau, Streamlit, Matplotlib, Figma</p>
+      </div>
+      <div class="skill-cat">
+        <h3>Health Informatics &amp; Interoperability</h3>
+        <p>ICD-10 clinical coding, Casemix systems, Electronic Health Records (EHR), HL7/FHIR interoperability, telehealth systems, healthcare information systems</p>
+      </div>
+      <div class="skill-cat">
+        <h3>Process &amp; Operations Analytics</h3>
+        <p>Process mapping, Statistical Process Control (SPC), process capability analysis, Spearman's rank correlation, throughput &amp; bottleneck analysis</p>
+      </div>
+      <div class="skill-cat">
+        <h3>Other</h3>
+        <p>Git / GitHub, no-code AI development &amp; deployment, cross-functional agile delivery</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-lead">Good data science in healthcare starts with asking whether a clinician would actually trust the answer.</div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <dt>Email (United Kingdom)</dt>
+        <dd><a href="mailto:afiqah.kamaruddin.uk@gmail.com">afiqah.kamaruddin.uk@gmail.com</a></dd>
+      </div>
+      <div class="contact-item">
+        <dt>Email (Malaysia)</dt>
+        <dd><a href="mailto:afiqah.kamaruddin.my@gmail.com">afiqah.kamaruddin.my@gmail.com</a></dd>
+      </div>
+      <div class="contact-item">
+        <dt>LinkedIn</dt>
+        <dd><a href="https://linkedin.com/in/afiqahwankamaruddin" target="_blank" rel="noopener">/in/afiqahwankamaruddin</a></dd>
+      </div>
+      <div class="contact-item">
+        <dt>Location</dt>
+        <dd>United Kingdom &amp; Malaysia</dd>
+      </div>
+    </div>
+    <div class="foot-note">© 2026 Afiqah Kamaruddin</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Limited-Data CT Reconstruction of a Pharmaceutical Tablet · Afiqah Kamaruddin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122A2E; --paper:#F4F1E9; --paper-raised:#FFFFFF;
+    --teal:#2C6E68; --teal-deep:#193F3C; --signal:#C98A2C;
+    --line:rgba(18,42,46,0.14); --muted:#5B6E6C;
+    --display: 'Fraunces', serif; --body: 'Inter', -apple-system, sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.65; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 28px;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(244,241,233,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav .wrap{max-width:960px; display:flex; justify-content:space-between; align-items:center; height:64px;}
+  .nav-name{font-family:var(--mono); font-size:13px;}
+  .back-link{font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); text-decoration:none;}
+  .back-link:hover{color:var(--teal-deep);}
+
+  header{padding:56px 0 32px;}
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1{font-family:var(--display); font-weight:600; font-size:clamp(28px,4.5vw,40px); color:var(--teal-deep); line-height:1.15;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:36px 0;}
+  @media(max-width:600px){.stat-row{grid-template-columns:1fr;}}
+  .stat-card{background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:20px; text-align:center;}
+  .stat-card .num{font-family:var(--mono); font-size:26px; font-weight:600; color:var(--signal);}
+  .stat-card .lbl{font-size:12.5px; color:var(--muted); margin-top:6px;}
+
+  section{padding:36px 0; border-top:1px solid var(--line);}
+  h2{font-family:var(--display); font-size:21px; font-weight:600; color:var(--teal-deep); margin-bottom:14px;}
+  p{font-size:15.5px; color:var(--ink); text-align:justify; margin-bottom:14px;}
+  ul{margin:14px 0 14px 20px;}
+  li{font-size:15.5px; color:var(--ink); margin-bottom:8px; text-align:justify;}
+  li b{color:var(--teal-deep);}
+
+  table{width:100%; border-collapse:collapse; margin:20px 0; font-size:14px;}
+  th, td{border:1px solid var(--line); padding:8px 10px; text-align:left;}
+  th{background:var(--paper-raised); font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted);}
+  td.num{font-family:var(--mono);}
+
+  figure{margin:28px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:8px; background:#fff;}
+  figcaption{font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:10px; text-align:left;}
+  .fig-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:600px){.fig-row{grid-template-columns:1fr;}}
+
+  footer{padding:48px 0 56px; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  footer a{color:var(--teal); text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">AFIQAH K.</div>
+    <a class="back-link" href="index.html">← Back to portfolio</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Case Study</div>
+    <h1>Limited-Data CT Reconstruction of a Pharmaceutical Tablet</h1>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="num">5%</div><div class="lbl">Of standard Nyquist projections tested</div></div>
+      <div class="stat-card"><div class="num">CGLS</div><div class="lbl">Best noise reduction &amp; edge sharpness</div></div>
+      <div class="stat-card"><div class="num">SIRT</div><div class="lbl">Most consistent drug-bead intensity</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The Problem</h2>
+    <p>High-quality 3D X-ray scans (CT scans) are essential for checking the internal structure of pharmaceutical products, but they are often incredibly slow to produce. There is a constant tug-of-war between scan time and image quality: scan too quickly, and the resulting images become too blurry or noisy to be useful for research.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>My Approach</h2>
+    <p>I analysed a 3D X-ray dataset of an ibuprofen capsule (800×800 pixel field of view, 22μm effective pixel size) to see how much scan data could be cut before the reconstructed images became unreliable. I compared a fast, standard reconstruction formula (FDK, Feldkamp-Davis-Kress) against two "iterative" methods, CGLS and SIRT, that refine the image step by step, simulating scenarios down to just 5% of the projections normally required for a clean scan.</p>
+    <p>Before running the comparison, I first had to determine the optimal centre of rotation using signal-to-noise and edge-sharpness measures, and build explicit "stopping rules" so the iterative methods would halt once image sharpness plateaued for at least three consecutive iterations, rather than over-refining and introducing new artefacts.</p>
+
+    <table>
+      <thead>
+        <tr><th>Nyquist projection level</th><th>Projections used</th><th>Reduction factor</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>40%</td><td class="num">504</td><td class="num">5×</td></tr>
+        <tr><td>30%</td><td class="num">360</td><td class="num">7×</td></tr>
+        <tr><td>20%</td><td class="num">252</td><td class="num">10×</td></tr>
+        <tr><td>10%</td><td class="num">126</td><td class="num">20×</td></tr>
+        <tr><td>5%</td><td class="num">63</td><td class="num">40×</td></tr>
+      </tbody>
+    </table>
+
+    <figure>
+      <img src="assets/ct-tablet/fig2_optimal_fdk.png" alt="Ibuprofen capsule reconstructed with FDK at full (100% Nyquist) projection count, shown as a 2D slice, 3D volume render, and 2D/3D thickness maps.">
+      <figcaption>Baseline: the ibuprofen capsule reconstructed with FDK at the full, optimal projection count, used as the reference for "good" image quality (2D slice, 3D volume, and thickness maps).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Key Results</h2>
+
+    <figure>
+      <img src="assets/ct-tablet/fig9_comparison_grid.png" alt="Grid comparing FDK, CGLS, and SIRT reconstructions of the same capsule slice at 40%, 30%, 20%, 10%, and 5% Nyquist projection levels.">
+      <figcaption>Same slice, three algorithms, five data levels. FDK degrades fastest as projections drop; SIRT stays visibly the clearest and highest-contrast even at 5%.</figcaption>
+    </figure>
+
+    <ul>
+      <li><b>Best for clarity:</b> CGLS was the most robust at eliminating background noise and keeping edges sharp, with SNR continuing to climb across iterations even at 90% fewer projections than a standard acquisition.</li>
+      <li><b>Most reliable for drug research:</b> SIRT best preserved the "intensity" (density) of the drug beads within the capsule. This matters because researchers use that density to estimate how fast a drug will dissolve and release in the body.</li>
+      <li><b>Traditional methods struggled:</b> The standard FDK formula showed a sharp drop in sharpness under limited data, confirming it needs far more projections, and therefore longer scan times, to perform reliably.</li>
+    </ul>
+
+    <div class="fig-row">
+      <figure>
+        <img src="assets/ct-tablet/fig7_snr_bar.png" alt="Bar chart of signal-to-noise ratio for FDK, CGLS, and SIRT reconstructions across all tested projection levels.">
+        <figcaption>CGLS holds the highest SNR at nearly every data level; the optimum FDK acquisition scores lowest.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/ct-tablet/fig8_sharpness_bar.png" alt="Bar chart of image sharpness for FDK, CGLS, and SIRT reconstructions across all tested projection levels.">
+        <figcaption>FDK's sharpness only wins at full (100%) Nyquist data; it collapses under any data reduction.</figcaption>
+      </figure>
+    </div>
+
+    <figure>
+      <img src="assets/ct-tablet/fig11_thickness_2d.png" alt="Thickness-map grid comparing FDK, CGLS, and SIRT at 40% down to 5% Nyquist projections, colour-coded by bead intensity.">
+      <figcaption>Bead thickness maps (used to estimate drug dose and dissolution): SIRT (right column) keeps consistent green–orange intensity across all data levels, while FDK and CGLS (left, middle) stay flat and blue, under-representing bead density as data drops.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="assets/ct-tablet/fig13_bead_intensity.png" alt="Log-scale line graph of mean maximum bead intensity versus number of projections for FDK, CGLS, and SIRT.">
+      <figcaption>SIRT (yellow) maintains an order-of-magnitude higher, more stable bead intensity than FDK (blue) or CGLS (orange) as projections drop. This is the basis for its edge in dose/dissolution prediction.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What I Learned</h2>
+    <p>More processing isn't always better. I had to implement specific stopping rules to prevent the reconstruction algorithms from over-refining and introducing new errors once sharpness had plateaued. This project taught me how to balance computational effort against the physical realities of X-ray imaging, and how the "best" reconstruction algorithm depends on the task: CGLS for edge detail and noise control, SIRT for quantitative accuracy in dose-critical measurements.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Afiqah Kamaruddin · <a href="index.html">Back to portfolio</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
